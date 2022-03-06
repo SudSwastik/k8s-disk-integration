@@ -1,0 +1,11 @@
+echo "apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gcp-pvc
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: ps-fast
+  accessModes:
+    - ReadWriteOnce" | kubectl apply -f -

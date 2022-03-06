@@ -1,0 +1,29 @@
+
+echo "apiVersion: v1
+kind: Pod
+metadata:
+  name: gcp-pod
+spec:
+  volumes:
+    - name: htmlvol
+      persistentVolumeClaim:
+        claimName: gcp-pvc
+  containers:
+    - name: main-ctr
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: htmlvol
+    - name: helper-ctr
+      image: ubuntu
+      command:
+      - /bin/bash
+      - "-c"
+      - "sleep 60m"
+      volumeMounts:
+      - mountPath: /data
+        name: htmlvol" |  kubectl apply -f -
+

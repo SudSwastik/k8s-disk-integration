@@ -1,0 +1,15 @@
+echo "apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: gcp-pv
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ps-fast
+  gcePersistentDisk:
+    pdName: gcp-ssd" | kubectl apply -f -
+ 
